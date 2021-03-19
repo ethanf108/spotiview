@@ -1,0 +1,28 @@
+.tabl{
+    white-space: nowrap;
+    table-layout:fixed;
+    border-collapse: collapse;
+    border-spacing:0;
+}
+.tabl td{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.rowe{
+    min-width:64px;
+    min-height:64px;
+    padding:0px;
+    border:0px;
+}
+.imag{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+*{
+
+    padding: 0px 0 0;
+    border: 0px;
+    vertical-align: baseline;
+}

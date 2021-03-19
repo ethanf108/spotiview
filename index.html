@@ -1,0 +1,40 @@
+<!Doctype HTML>
+<html>
+    <head>
+        <link rel="stylesheet" href="index.css" type="text/css"/>
+
+        <title>Spotiview</title>
+        <script src="lib.js" type="text/javascript"></script>
+        <script src="index.js" type="text/javascript" defer></script>
+    </head>
+    <body>
+        <div id="landing" hidden>
+            <h1>Welcome to Spotiview!</h1>
+            <br />
+            <button onclick="spotifyRedirect()">Login with Spotify</button>
+        </div>
+        <div id="loading" hidden>
+            <h1>loading</h1>
+        </div>
+        <div id="analysis" hidden>
+            <select name="scope" id="scope-select"  onclick="scopeSelect()">
+                <option value="libOnly">Library</option>
+                <option value="allPLs">Library + Playlists</option>
+            </select>
+            <table class='tabl' id='empty-table'>
+                <thead id='da'></thead>
+                <tbody id="ds"></tbody>
+            </table>
+            <table class='tabl' id='aTable1'>
+                <thead id='aHead1'></thead>
+                <tbody id="a"></tbody>
+            </table>
+            <br />
+            <br />
+            <table class='tabl' id='aTable2'>
+                <thead id='aHead2'></thead>
+                <tbody id="b"></tbody>
+            </table>
+        </div>
+    </body>
+</html>
