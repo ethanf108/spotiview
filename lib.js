@@ -17,7 +17,7 @@ var localIdCount = -1;
 function spotifyRedirect() {
     var sLink = "https://accounts.spotify.com/authorize?";
     sLink += "client_id=" + clientID + "&";
-    sLink += "redirect_uri=" + encodeURIComponent(domain + "/index.html") + "&"; //production
+    sLink += "redirect_uri=" + encodeURIComponent(domain) + "&"; //production
     //sLink += "redirect_uri=" + encodeURIComponent("http://localhost:8383/spotiview" + "/index.html") + "&"; //testing
     sLink += "response_type=token&";
     sLink += "scope=" + encodeURIComponent("playlist-read-private user-library-read user-read-private playlist-read-collaborative") + " & ";
