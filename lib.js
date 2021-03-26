@@ -4,6 +4,7 @@ var domain = "https://ethanf108.github.io/spotiview";
 var tracks = {};
 var albums = {};
 var playlists = [];
+var artists = {};
 
 var username = "";
 
@@ -54,7 +55,8 @@ function loadTracks(cb = null, fromPL = false, URL = "https://api.spotify.com/v1
                 popularity: item.popularity,
                 length: item.duration_ms,
                 track_number: item.track_number,
-                explicit: item.explicit
+                explicit: item.explicit,
+                artists: item.track.album.artists
             };
             if (trackObject.local) {
                 trackObject.id = localIdCount--;
@@ -72,6 +74,17 @@ function loadTracks(cb = null, fromPL = false, URL = "https://api.spotify.com/v1
                 tracks[trackObject.id].notAddedByOwner &= trackObject.notAddedByOwner;
             } else {
                 tracks[trackObject.id] = trackObject;
+            }
+            for (var artist of trackObject.artists) {
+                if (!artists[artist.id]) {
+                    artists[artist.id] = artist;
+                    artists[artist.id].numTracks = 0;
+                    artists[artist.id].numPLTracks = 0;
+                }
+                artists[artist.id].numPLTracks++;
+                if (!tracks[trackObject.id].fromPL) {
+                    artists[artist.id].numTracks++;
+                }
             }
         });
         if (responseObject.next !== null) {
@@ -132,6 +145,12 @@ function getUsername() {
     request.setRequestHeader("Authorization", "Bearer " + userToken);
     request.send();
     request.onload = e => {
+        if (request.status === 401) {
+            var expire = new Date();
+            expire.setDate(expire.getDate() - 7);
+            document.cookie = "spotifyAPIKey=; expires=" + expire.toUTCString();
+            window.location = "/spotiview/index.html";
+        }
         responseObject = JSON.parse(request.responseText);
         username = responseObject.id;
         setTimeout(loadPlaylists, 0);

@@ -1,7 +1,9 @@
-/* global clientID, domain, playlists, tracks, albums */
+/* global clientID, domain, playlists, tracks, albums, artists */
 
 var libOnly;
 var allPLs;
+
+var includePLs = false;
 
 function getKeyFromCookie() {
     for (var cookie of document.cookie.split(";")) {
@@ -107,8 +109,36 @@ function displayAll() {
 }
 
 function scopeSelect() {
-    document.getElementById("aTable1").hidden = document.getElementById("scope-select").value !== "allPLs";
-    document.getElementById("aTable2").hidden = document.getElementById("scope-select").value !== "libOnly";
+    includePLs = document.getElementById("scope-select").value === "allPLs";
+    document.getElementById("aTable1").hidden = !includePLs;
+    document.getElementById("aTable2").hidden = includePLs;
+    document.getElementById("top5artists").hidden = includePLs;
+    document.getElementById("top5artistsPL").hidden = !includePLs;
+}
+
+function artists() {
+    var ap = document.getElementById("top5artists");
+    var apPL = document.getElementById("top5artistsPL");
+    var top5 = Object.keys(artists).sort(function (a, b) {
+        return artists[b].numTracks - artists[a].numTracks;
+    });
+    var top5PL = Object.keys(artists).sort(function (a, b) {
+        return artists[b].numPLTracks - artists[a].numPLTracks;
+    });
+    var count = 0;
+    for (var artist of top5) {
+        count++;
+        ap.innerHTML += "<p>" + artists[artist].name + ": " + artists[artist].numTracks + "</p><br />";
+        if (count === 5)
+            break;
+    }
+    count = 0;
+    for (var artist of top5PL) {
+        count++;
+        apPL.innerHTML += "<p>" + artists[artist].name + ": " + artists[artist].numPLTracks + "</p><br />";
+        if (count === 5)
+            break;
+    }
 }
 
 function afterLoad() {
@@ -116,6 +146,7 @@ function afterLoad() {
     loadAlbumsByYear();
     displayAll();
     scopeSelect();
+    artists();
     document.getElementById("analysis").hidden = false;
 }
 
