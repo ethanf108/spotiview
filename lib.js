@@ -45,6 +45,9 @@ function loadTracks(cb = null, fromPL = false, URL = "https://api.spotify.com/v1
         }
         responseObject = JSON.parse(request.responseText);
         responseObject.items.forEach(item => {
+            if (!item.track) {
+                return;
+            }
             const album_release = item.track.album.release_date;
             var trackObject = {
                 fromPL: fromPL,
