@@ -11,7 +11,7 @@ var userToken = null;
 var callback;
 
 var libraryDone = false;
-var playlistCount = -1;
+var playlistsDone = false;
 var localIdCount = -1;
 
 function spotifyRedirect() {
@@ -75,7 +75,7 @@ function loadTracks(cb = null, fromPL = false, URL = "https://api.spotify.com/v1
             }
         });
         if (responseObject.next !== null) {
-            setTimeout(loadTracks, 1000, cb, fromPL, responseObject.next);
+            setTimeout(loadTracks, 0, cb, fromPL, responseObject.next);
         } else {
             if (cb) {
                 setTimeout(cb, 0);
@@ -84,11 +84,13 @@ function loadTracks(cb = null, fromPL = false, URL = "https://api.spotify.com/v1
     };
 }
 
-function loadSongsFromPlaylists() {
-    playlistCount = playlists.length;
-    for (var pl of playlists) {
-        loadTracks(() => playlistCount--, true, "https://api.spotify.com/v1/playlists/" + pl.id + "/tracks?offset=" + 0 + "&limit=" + 50);
+function loadSongsFromPlaylists(i) {
+    if (i >= playlists.length) {
+        playlistsDone = true;
+        setTimeout(loadTracks, 0, doneLibrary);
+        return;
     }
+    loadTracks(() => loadSongsFromPlaylists(i + 1), true, "https://api.spotify.com/v1/playlists/" + playlists[i].id + "/tracks?offset=" + 0 + "&limit=" + 50);
 }
 
 function loadPlaylists(URL = "https://api.spotify.com/v1/me/playlists?offset=" + 0 + "&limit=" + 50) {
@@ -112,19 +114,15 @@ function loadPlaylists(URL = "https://api.spotify.com/v1/me/playlists?offset=" +
         }
         );
         if (responseObject.next !== null) {
-            setTimeout(loadPlaylists, 100, responseObject.next);
+            setTimeout(loadPlaylists, 0, responseObject.next);
         } else {
-            setTimeout(loadSongsFromPlaylists, 0);
+            setTimeout(loadSongsFromPlaylists, 0, 0);
         }
     };
 }
 
 function doneLibrary() {
     libraryDone = true;
-}
-
-function donePlaylists() {
-    playlistsDone = true;
 }
 
 function getUsername() {
@@ -137,7 +135,6 @@ function getUsername() {
         responseObject = JSON.parse(request.responseText);
         username = responseObject.id;
         setTimeout(loadPlaylists, 0);
-        setTimeout(loadTracks, 1000, doneLibrary);
     };
 
 }
@@ -171,7 +168,7 @@ function analyzeAlbum() {
 }
 
 function untilDone() {
-    if (playlistCount === 0 && libraryDone) {
+    if (playlistsDone && libraryDone) {
         setTimeout(analyzeAlbum, 0);
     } else {
         setTimeout(untilDone, 500);
