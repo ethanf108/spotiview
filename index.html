@@ -11,13 +11,13 @@
         <div id="landing" hidden>
             <h1>Welcome to Spotiview!</h1>
             <br />
-            <button onchange="spotifyRedirect()">Login with Spotify</button>
+            <button onclick="spotifyRedirect()">Login with Spotify</button>
         </div>
         <div id="loading" hidden>
             <h1>loading</h1>
         </div>
         <div id="analysis" hidden>
-            <select name="scope" id="scope-select"  onclick="scopeSelect()">
+            <select name="scope" id="scope-select"  onchange="scopeSelect()">
                 <option value="libOnly">Library</option>
                 <option value="allPLs">Library + Playlists</option>
             </select>
