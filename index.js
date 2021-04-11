@@ -93,7 +93,7 @@ function displayAll() {
                     ttd +=
                             "<td><img src='" +
                             nameLater.albs[year][i].img +
-                            "' height='64' width='64' title='" + nameLater.albs[year][i].name + " (" + nameLater.albs[year][i].year + ")' class='imag'></img></td>";
+                            "' height='32' width='32' title=\"" + nameLater.albs[year][i].name.replaceAll(/"/g, '\\\"') + " (" + nameLater.albs[year][i].year + ")\" class='imag'></img></td>";
                 } else {
                     ttd += "<td><p></p></td>";
                 }
@@ -102,7 +102,11 @@ function displayAll() {
         }
         ttd = "";
         for (var i = nameLater.lowestYear; i <= nameLater.highestYear; i++) {
-            ttd += "<td><p style='text-align:center'>" + i + "</p></td>";
+            var text = "";
+            if (("" + i).endsWith("0") || i === nameLater.lowestYear || i === nameLater.highestYear) {
+                text = i;
+            }
+            ttd += "<td><p class='lbl' style='text-align:center'>" + text + "</p></td>";
         }
         tabl.innerHTML += "<tr>" + ttd + "</tr>";
     }

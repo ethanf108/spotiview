@@ -10,8 +10,8 @@
     text-overflow: ellipsis;
 }
 .rowe{
-    min-width:64px;
-    min-height:64px;
+    min-width:32px;
+    min-height:32px;
     padding:0px;
     border:0px;
 }
@@ -25,4 +25,11 @@
     padding: 0px 0 0;
     border: 0px;
     vertical-align: baseline;
+}
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #1ED760 !important;
+}
+
+.lbl {
+    font-size: 10px;
 }

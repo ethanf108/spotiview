@@ -180,7 +180,7 @@ function analyzeAlbum() {
                 };
             }
             if (track.album.images && track.album.images[0]) {
-                albums[track.album.id].img = track.album.images[0].url;
+                albums[track.album.id].img = track.album.images[1].url;
             }
             albums[track.album.id].fromPL &= track.fromPL;
             albums[track.album.id].notAddedByOwner &= track.notAddedByOwner;
