@@ -93,7 +93,7 @@ function displayAll() {
                     ttd +=
                             "<td><img src='" +
                             nameLater.albs[year][i].img +
-                            "' height='32' width='32' title=\"" + nameLater.albs[year][i].name.replaceAll(/"/g, '\\\"') + " (" + nameLater.albs[year][i].year + ")\" class='imag'></img></td>";
+                            "' height='16' width='16' title=\"" + nameLater.albs[year][i].name.replaceAll(/"/g, '\\\"') + " (" + nameLater.albs[year][i].year + ")\" class='imag'></img></td>";
                 } else {
                     ttd += "<td><p></p></td>";
                 }
@@ -132,14 +132,14 @@ function artists() {
     var count = 0;
     for (var artist of top5) {
         count++;
-        ap.innerHTML += "<p>" + artists[artist].name + ": " + artists[artist].numTracks + "</p><br />";
+        ap.innerHTML += "<p>" + artists[artist].name + " (" + artists[artist].numTracks + ")</p>";
         if (count === 5)
             break;
     }
     count = 0;
     for (var artist of top5PL) {
         count++;
-        apPL.innerHTML += "<p>" + artists[artist].name + ": " + artists[artist].numPLTracks + "</p><br />";
+        apPL.innerHTML += "<p>" + artists[artist].name + " (" + artists[artist].numPLTracks + ")</p>";
         if (count === 5)
             break;
     }
@@ -161,6 +161,11 @@ function onLoad() {
     } else {
         document.getElementById("landing").hidden = false;
     }
+}
+
+function donate() {
+    document.getElementById("donateDiv").hidden = false;
+    window.scrollTo(0, 10000);
 }
 
 onLoad();

@@ -11,7 +11,7 @@
         <script src="index.js" type="text/javascript" defer></script>
     </head>
     <body>
-        <div class="">
+        <div style="margin: 1%">
             <div class="text-center" id="landing" hidden>
                 <h1>Welcome to Spotiview!</h1>
                 <br />
@@ -24,26 +24,39 @@
                 </div>
             </div>
             <div id="analysis" hidden>
-                <table class='tabl' id='empty-table'>
+                <table class='tabl text-center' id='empty-table'>
                     <thead id='da'></thead>
                     <tbody id="ds"></tbody>
                 </table>
-                <table class='tabl' id='aTable1'>
+                <table class='tabl text-center' id='aTable1'>
                     <thead id='aHead1'></thead>
                     <tbody id="a"></tbody>
                 </table>
-                <br />
-                <br />
                 <table class='tabl' id='aTable2'>
                     <thead id='aHead2'></thead>
                     <tbody id="b"></tbody>
                 </table>
-                <select name="scope" id="scope-select"  onchange="scopeSelect()">
+                <select name="scope" id="scope-select" class="form-select" style="width: auto;" onchange="scopeSelect()">
                     <option value="libOnly">Library</option>
                     <option value="allPLs">Library + Playlists</option>
                 </select>
-                <div id="top5artists" hidden></div>
-                <div id="top5artistsPL" hidden></div>
+                <br />
+                <div id="top5artists" hidden>
+                    <p class="text">Your top 5 artists:</p>
+                </div>
+                <div id="top5artistsPL" hidden>
+                    <p class="text">Your top 5 artists:</p>
+                </div>
+                <br />
+                <div class="text-center">
+                    <button class="text-center btn btn-link" onclick="donate()">Donate 😁</button>
+                </div>
+                <div class="text-center" id="donateDiv" hidden>
+                    <p>Any donation is appreciated! Thanks :)</p>
+                    <p>BTC: 39dDa35HPtP2YKZFFCN35JwebNoEebr28Q</p>
+                    <p>ETH: 0xF60Ff164daD5094D7F3328CE8E3c8Ee4c72F26dB</p>
+                    <p>LTC: MFq2ki5WZF76hU9Vs47Ft57aUJ9zsBws4y</p>
+                </div>
             </div>
         </div>
     </body>

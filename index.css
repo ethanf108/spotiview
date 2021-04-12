@@ -10,8 +10,8 @@
     text-overflow: ellipsis;
 }
 .rowe{
-    min-width:32px;
-    min-height:32px;
+    min-width:16px;
+    min-height:16px;
     padding:0px;
     border:0px;
 }
@@ -31,5 +31,5 @@
 }
 
 .lbl {
-    font-size: 10px;
+    font-size: 5px;
 }
