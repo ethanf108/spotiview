@@ -55,10 +55,10 @@ function loadAlbumsByYearHelper(valChecker) {
             ret.albs[alb.year] = [];
         }
         ret.albs[alb.year].push(alb);
-        if (alb.year !== undefined && alb.year > ret.highestYear || ret.highestYear === -1) {
+        if (alb.year !== undefined && (alb.year > ret.highestYear || ret.highestYear === -1)) {
             ret.highestYear = alb.year;
         }
-        if (alb.year !== undefined && alb.year < ret.lowestYear || ret.lowestYear === -1) {
+        if (alb.year !== undefined && (alb.year < ret.lowestYear || ret.lowestYear === -1)) {
             ret.lowestYear = alb.year;
         }
         if (ret.albs[alb.year].length > ret.longestAlbArr || ret.longestAlbArr === -1) {
