@@ -79,6 +79,9 @@ function loadTracks(cb = null, fromPL = false, URL = "https://api.spotify.com/v1
                 tracks[trackObject.id] = trackObject;
             }
             for (var artist of trackObject.artists) {
+                if (/^Various Artists$/ig.test(artist.name)) {
+                    continue;
+                }
                 if (!artists[artist.id]) {
                     artists[artist.id] = artist;
                     artists[artist.id].numTracks = 0;
